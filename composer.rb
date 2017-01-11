@@ -2283,11 +2283,11 @@ stage_three do
   if prefer :authentication, 'devise'
     copy_from_repo 'db/seeds.rb', :repo => 'https://raw.github.com/RailsApps/rails-devise/master/'
     if prefer :authorization, 'roles'
-      copy_from_repo 'app/services/create_admin_service.rb', :repo => 'https://raw.github.com/RailsApps/rails-devise-roles/master/'
+      copy_from_repo 'app/services/create_admin_service.rb', :repo => 'https://raw.github.com/tomelam/rails-devise-roles/master/'
     elsif prefer :authorization, 'pundit'
-      copy_from_repo 'app/services/create_admin_service.rb', :repo => 'https://raw.github.com/RailsApps/rails-devise-pundit/master/'
+      copy_from_repo 'app/services/create_admin_service.rb', :repo => 'https://raw.github.com/tomelam/rails-devise-pundit/master/'
     else
-      copy_from_repo 'app/services/create_admin_service.rb', :repo => 'https://raw.github.com/RailsApps/rails-devise/master/'
+      copy_from_repo 'app/services/create_admin_service.rb', :repo => 'https://raw.github.com/tomelam/rails-devise/master/'
     end
   end
   if prefer :apps4, 'rails-stripe-coupons'
@@ -2319,7 +2319,7 @@ FILE
   end
   ## DEVISE-CONFIRMABLE
   if (prefer :devise_modules, 'confirmable') || (prefer :devise_modules, 'invitable')
-    inject_into_file 'app/services/create_admin_service.rb', "        user.confirm!\n", :after => "user.password_confirmation = Rails.application.secrets.admin_password\n"
+    inject_into_file 'app/services/create_admin_service.rb', "        user.confirm\n", :after => "user.password_confirmation = Rails.application.secrets.admin_password\n"
   end
   ## DEVISE-INVITABLE
   if prefer :devise_modules, 'invitable'
